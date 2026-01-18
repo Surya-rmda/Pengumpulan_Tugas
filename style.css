@@ -1,0 +1,63 @@
+/* Latar belakang luar dark cyan */
+body {
+  background-color: #008b8b;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Kotak utama transparan 40% */
+.container {
+  background: rgba(255, 255, 255, 0.4);
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Input dan Select transparan 20% */
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 20px 0;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #444;
+  border-radius: 5px;
+  box-sizing: border-box; /* Biar gak luber */
+}
+
+/* Tombol warna gelap */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #004d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #003333;
+}
+
+/* Tabel buat di halaman guru */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  margin-top: 15px;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+th {
+  background-color: #eee;
+}

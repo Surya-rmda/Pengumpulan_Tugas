@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Judul halaman yang muncul di tab browser -->
+    <title>Halaman Siswa - Kirim Tugas</title>
+
+    <!-- Menghubungkan file CSS eksternal -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Judul halaman -->
+    <h2>Pengumpulan Tugas</h2>
+
+    <!-- Menampilkan nama siswa yang login -->
+    <p>Nama Siswa: <b id="nama"></b></p>
+
+    <!-- Form pengumpulan tugas -->
+    <!-- onsubmit memanggil fungsi kumpul() -->
+    <form onsubmit="kumpul(event)">
+      
+      <!-- Input nama tugas -->
+      <label>Nama Tugas</label><br>
+      <input type="text" id="tugas" required><br><br>
+
+      <!-- Pilihan mata pelajaran -->
+      <label>Mata Pelajaran</label><br>
+      <select id="mapel">
+        <option>Matematika</option>
+        <option>Bahasa Indonesia</option>
+        <option>MPP</option>
+        <option>PEM WEB</option>
+      </select><br><br>
+
+      <!-- Input upload file tugas -->
+      <!-- (Catatan: file belum disimpan, hanya simulasi) -->
+      <label>Upload File</label><br>
+      <input type="file" id="fileInput" required><br><br>
+
+      <!-- Tombol submit -->
+      <button type="submit">Kumpulkan Tugas</button>
+    </form>
+
+    <script>
+    // Ambil nama user dari localStorage
+    const namaUser = localStorage.getItem("namaUser");
+    // Tampilkan nama user ke halaman
+    document.getElementById("nama").innerText = namaUser;
+
+    // Fungsi dijalankan saat form disubmit
+    function kumpul(e) {
+    e.preventDefault(); // Mencegah halaman refresh
+
+    // Ambil nilai input
+    const tugas = document.getElementById("tugas").value.trim();
+    const mapel = document.getElementById("mapel").value;
+    const file = document.getElementById("fileInput").files[0];
+
+    // Validasi input
+    if (!tugas || !file) {
+      alert("Lengkapi dulu ya, jangan buru-buru 😄");
+      return;
+    }
+
+    // Data tugas yang akan disimpan
+    const dataBaru = {
+      nama: namaUser,
+      tugas,
+      mapel,
+      status: "Sudah Dikirim"
+    };
+
+    // Ambil data lama lalu tambahkan data baru
+    const semuaTugas = JSON.parse(localStorage.getItem("dataTugas")) || [];
+    semuaTugas.push(dataBaru);
+    localStorage.setItem("dataTugas", JSON.stringify(semuaTugas));
+
+    // Notifikasi dan reset form
+    alert("Tugas berhasil dikirim 💪");
+    e.target.reset();
+  }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Judul halaman yang tampil di tab browser -->
+    <title>Halaman Guru</title>
+
+    <!-- Menghubungkan file CSS eksternal -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- CSS internal khusus halaman guru -->
+    <style>
+      /* Mengatur tampilan dasar halaman */
+      body {
+        font-family: Arial;
+        margin: 30px;
+        background-color: #008b8b;
+      }
+
+      /* Mengatur tampilan tabel */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: darkcyan;
+      }
+
+      /* Mengatur sel tabel (header & isi) */
+      th, td {
+        padding: 10px;
+        border: 1px solid #000000;
+      }
+
+      /* Warna latar khusus header tabel */
+      th {
+        background-color: darkcyan;
+      }
+    </style>
+</head>
+<body>
+
+    <!-- Judul utama halaman -->
+    <h2>Daftar Pengumpulan Tugas</h2>
+
+    <!-- Tabel untuk menampilkan data tugas siswa -->
+    <table>
+      <thead>
+        <tr>
+          <!-- Judul kolom tabel -->
+          <th>Nama Siswa</th>
+          <th>Nama Tugas</th>
+          <th>Mata Pelajaran</th>
+          <th>Status</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+
+      <!-- Isi tabel akan dimasukkan lewat JavaScript -->
+      <tbody id="hasil"></tbody>
+    </table>
+
+    <script>
+  // Ambil data tugas dari localStorage (kalau belum ada, pakai array kosong)
+  const listTugas = JSON.parse(localStorage.getItem("dataTugas")) || [];
+  // Ambil tbody tabel untuk menampilkan data
+  const tabel = document.getElementById("hasil");
+
+  // Fungsi untuk menampilkan data ke tabel
+  function render() {
+    tabel.innerHTML = ""; // Kosongkan tabel biar tidak dobel
+    listTugas.forEach((t, i) => {
+      tabel.innerHTML += `
+        <tr>
+          <td>${t.nama}</td>
+          <td>${t.tugas}</td>
+          <td>${t.mapel}</td>
+          <td><b>${t.status}</b></td>
+          <td><button onclick="hapus(${i})">Hapus</button></td>
+        </tr>
+      `;
+    });
+  }
+
+  // Fungsi menghapus data berdasarkan index
+  function hapus(i) {
+    if (!confirm("Yakin hapus?")) return; // Konfirmasi hapus
+    listTugas.splice(i, 1); // Hapus 1 data dari array
+    localStorage.setItem("dataTugas", JSON.stringify(listTugas)); // Simpan ulang
+    render(); // Tampilkan ulang tabel
+  }
+
+  render(); // Render pertama kali saat halaman dibuka
+</script>
+
+
+</body>
+</html>
